@@ -1,0 +1,3040 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Take It — Rencontre & Services</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    :root{
+      --bg:#fff7f9;           /* fond très clair */
+      --card:#fff;            /* cartes blanches */
+      --muted:#4A001F;
+      --accent1:#ff7a95;      /* corail/rose */
+      --accent2:#6ee7b7;      /* vert menthe */
+      --accent3:#ffd580;      /* or doux */
+      --glass: rgba(0,0,0,0.03);
+    }
+    html,body{height:100%;background:var(--bg);color:#0b1220;font-family:Inter,system-ui,Arial;margin:0;}
+    .navbar{background:linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95)); box-shadow: 0 2px 8px rgba(11,18,32,0.05);}
+    .brand{background: linear-gradient(90deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:800;}
+    .search-card{background:var(--card); padding:1rem; border-radius:12px; border:1px solid rgba(11,18,32,0.04); box-shadow:0 6px 30px rgba(11,18,32,0.03);}
+    .card-prof{background:var(--card); border-radius:12px; border:1px solid rgba(11,18,32,0.04); box-shadow:0 8px 30px rgba(11,18,32,0.04); aspect-ratio:3/4; }
+    .topCard{min-width:173px; }
+    .avatar{height:100%; object-fit:cover; border-radius: 12px; width:100%;}
+    .nav-avatar-btn{width:56px;height:56px;border-radius:50%;overflow:hidden;border:2px solid rgba(11,18,32,0.06);}
+    .nav-avatar-btn img{width:100%;height:100%;object-fit:cover;}
+    .nav-avatar-large{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid rgba(11,18,32,0.06);}
+    .small-muted{color:var(--muted);}
+    .btn-accent{background:#ff7a95;border:none; color:white ; font-weight:600;}
+    .service-row{display:flex; justify-content:space-between; align-items:center; padding:.35rem 0; border-bottom:1px dashed rgba(11,18,32,0.04);}
+    .sim-card img{width:100%; height:100px; object-fit:cover; border-radius:8px;}
+    .page-link{background:transparent; border:1px solid rgba(11,18,32,0.04); color:var(--accent1);}
+    .page-link.active{background:var(--accent1); color:#fff; border-color:var(--accent1);}
+    footer{padding:1rem;color:#6b7280; margin-top:2rem;}
+    /* card clickable pointer */
+    .card-clickable{cursor:pointer;}
+    @media (max-width:767px){ .avatar{height:100%;} ;.nav-avatar-text{display:none;} ; .navitem > .nav-link{text-align:start ; border-radius:none;
+    font-weight: bold;
+       color: #ff0c85;
+        background: none ;
+       
+       } 
+   .nav-item > .nav-link:hover{
+        color:  var(--muted);
+        font-weight: bolder;
+        background:none;
+        border:none;
+      } }
+ 
+    @media (min-width:570px) and (max-width:767px) { #small-muted{font-size:17px;width:110px;padding: 0px;}}
+ 
+    @media (min-width:768px) and (max-width:867px) { #small-muted{font-size:16px;width:80px;padding: 0px;}}
+    @media (max-width:354px) { .small-muted{font-size:17px;width:7.2rem;padding: 0px;}  }
+    @media (min-width:774px) { .navbar-nav{position:relative; right: 4em;}}
+    
+      
+   #profilNameText strong{
+    color:var(--muted);
+
+   }
+
+
+    .carousel-itemp{
+     aspect-ratio:1/1;
+   }
+  
+   .nav-link{
+    border-radius:20px ;
+    font-weight: bold;
+       color: #ff0c85;
+       transition: all 700ms ease;
+      }
+
+      .nav-link:hover{
+        color:  white;
+        font-weight: bolder;
+        background:#f58599;
+        border:1px solid #ff0c85;
+      }
+ 
+.btn-accent:hover {
+  background-color:#ff7a95;   /* couleur au survol */
+  color: white;
+}
+
+
+
+.brand:hover{background: linear-gradient(90deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:800;}
+    
+  
+  .carousel-inner{background: transparent;}
+/* card body overlay texte en bas */
+.overlay-info{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  min-height: 15vh;
+  padding: 6px;
+  background: rgba(255, 122, 149, 0.7);
+  border-radius : 0 0 12px 12px ;
+  color: #fff;
+}
+
+   .numwrap{
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap ;
+     scrollbar-width: none; /* Masque la scrollbar sur Firefox */
+      
+       overflow-x: scroll ;
+ }  
+  
+  .numwrap::-webkit-scrollbar {
+  display: none; /* Masque la scrollbar sur Chrome/Safari */
+}
+
+.topslide{
+  display: flex;
+  flex-direction: row ;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  
+}
+
+.page-link:hover{
+     color:#ff0c85;
+     background: rgba(255, 122, 149, 0.4);
+     border-color:rgba(255, 122, 149, 0.6);
+}
+  
+ .badge-premium {
+   display:inlign-flex;
+   align-items: center;
+   gap: 6px;
+   max-width:100%;
+   white-space: nowrap; /*empeche le retour a la ligne */
+    word-break:keep-all; /* empeche la coupure du mot */
+background: linear-gradient(45deg, #ff9966 0%, #ff5e62 100%);
+  color: white ;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+
+.badge-vip {
+  
+  display:inlign-flex;
+   align-items: center;
+   gap: 6px;
+   max-width:100%;
+   white-space: nowrap; /*empeche le retour a la ligne */
+    word-break:keep-all; /* empeche la coupure du mot */
+  background: linear-gradient(45deg, #ff5f6d, #ffc371);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.badge-avant{
+  z-index:50;
+  display:inlign-flex;
+   align-items: center;
+   gap: 6px;
+   max-width:100%;
+   white-space: nowrap; /*empeche le retour a la ligne */
+    word-break:keep-all; /* empeche la coupure du mot */
+    background: rgba(255, 122, 149,1);
+    border-radius: 8px;
+    color: white;
+  font-weight: bold;
+  font-size: 0.8em;
+ 
+}
+
+.online-dot {
+  
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 122, 149, 1);  
+  border-radius: 50%;
+  z-index: 50;
+  animation: pulse-dot 1.5s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+#topCarousel {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+#topCarouselInner {
+  display: flex;
+  gap: 10px;
+  transition: transform 0.6s ease;
+  will-change: transform;
+}
+
+.topslidet {
+  display: flex !important;
+  gap: 10px;
+}
+
+/* Animation pour ouvrir le modal depuis le haut */
+.modal.slide-down .modal-dialog {
+    transform: translateY(-60px);
+    opacity: 0;
+    transition: all 0.35s ease;
+}
+
+.modal.show.slide-down .modal-dialog {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-body{
+  background:#fff7f9;
+}
+
+
+
+
+.signButton , .loginButton{
+ background:#ff006e;
+  padding: 0.75 rem 0.375rem;
+  font-weight: bold;
+  color: white ;
+  border-radius: 0.375rem;
+}
+
+.signButton:hover , .loginButton:hover{
+    background: #ff006e ;
+    color: white;
+}
+
+.signButton:active , .loginButton:active{
+    background: #ff006e ;
+    color: white;
+}
+
+
+
+.signButton:disabled , .loginButton:disabled{
+  background: #ff006f94;
+  color: rgba(253, 249, 251, 0.671) ;
+ 
+}  
+
+
+
+
+.service-row{
+  color:black;
+  font-weight: bold ;
+}
+
+#profilDetails{
+  font-weight: bold;
+}
+
+#profilDetails strong{
+
+  color:var(--muted);
+}
+
+
+
+
+
+
+.btn-close-custom{
+  background: transparent;
+  border: none;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  position : absolute;
+  right: 12px;
+  text-align:end ;
+  justify-content: center;
+  width: 30px;
+  height:30px;
+  border-radius: 8px;
+  cursor: pointer;
+  /* transition: background .12s ease; */
+}
+
+.btn-close-custom:hover {
+ color:white;
+}
+
+
+.mColor , .mbtnColor{
+  background: #ff006e;
+  color:white;
+  font-weight:bold;
+  font-size:1.1em;
+ }
+
+ .alert{
+  background:  rgba(197, 4, 43, 0.555);
+  color:white;
+ }
+
+ .alert strong{
+  color:black;
+ }
+
+ 
+
+.scroll-horizontal {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Scrollbar horizontale personnalisée */
+.scroll-horizontal::-webkit-scrollbar {
+  height: 8px; /* hauteur de la barre horizontale */
+}
+
+/* Fond de la scrollbar */
+.scroll-horizontal::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+/* La barre de défilement */
+.scroll-horizontal::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 8px;
+}
+
+/* Survol */
+.scroll-horizontal::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Flèches gauche/droite */
+.scroll-horizontal::-webkit-scrollbar-button {
+  background: var(--muted);
+  width: 10px;
+}
+
+/* Survol des flèches */
+.scroll-horizontal::-webkit-scrollbar-button:hover {
+  background: var(--muted);
+}
+
+/* Firefox */
+.scroll-horizontal {
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) rgba(0,0,0,0.1);
+}
+
+
+.scroll-horizontal .card {
+  flex: 0 0 auto;
+}
+
+/* INDICATEURS — un peu plus visibles mais même design */
+#profileCarousel .carousel-indicators button {
+    background-color: rgba(255, 122, 149, 0.7) !important;
+    opacity: 1 !important;  /* juste plus visible */
+}
+
+#profileCarousel .carousel-indicators .active {
+    background-color: rgba(255, 122, 149, 1) !important;
+}
+
+/* FLECHES — même design, juste plus larges */
+#profileCarousel .carousel-control-prev-icon,
+#profileCarousel .carousel-control-next-icon {
+    filter: brightness(0) saturate(100%) invert(73%) sepia(31%) saturate(650%) hue-rotate(314deg) brightness(102%) contrast(120%);
+    width: 40px !important;   /* ⇦ augmente la largeur */
+    height: 40px !important;  /* optionnel : même hauteur */
+  opacity: 1 !important;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    opacity: 0.8 !important;
+}
+  
+  .carousel-control-prev:hover,
+.carousel-control-next:hover,
+.carousel-control-prev:focus,
+.carousel-control-next:focus,
+.carousel-control-prev:active,
+.carousel-control-next:active {
+    opacity: 1 !important;
+}
+
+
+.carousel-control-prev svg,
+.carousel-control-next svg {
+    opacity: 1 !important;
+}
+
+  .carousel-control-prev,
+.carousel-control-next {
+  pointer-events: auto !important;
+  touch-action: manipulation;
+}
+
+.carousel-control-prev svg,
+.carousel-control-next svg {
+  pointer-events: none; /* évite le blocage sur l’icône */
+}
+
+/* 
+.suggestions-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #111;
+  border-radius: 6px;
+  max-height: 160px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+
+.suggestions-box div {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.suggestions-box div:hover {
+  background: rgba(255,255,255,0.1);
+} */
+
+
+  </style>
+  
+</head>
+<body>
+  <!-- bouton de redirection vers le haut -->
+  <a id="btnTop" href="#" style="
+position:fixed;bottom:20px;right:20px;
+background:#ff4fa3;color:white;
+padding:12px;border-radius:50%;
+font-size:18px;text-decoration:none;z-index:100; opacity:0 ;">
+⬆
+</a>
+  
+ <!-- NAV -->
+<nav class="navbar navbar-expand-lg navbar-light" >
+  <div class="container">
+    
+    <a class="navbar-brand brand me-3" href="index.html">Take It💞 </a>
+
+    <!-- Zone bouton menu + avatar -->
+    <div class="d-flex align-items-center">
+
+      <!-- Avatar à droite du bouton -->
+      <div class="dropdown me-2 d-lg-none">
+        <button class="btn btn-transparent d-flex align-items-center" id="mobileAvatarBtn" data-bs-toggle="dropdown" style="background:transparent;border:none;">
+          <img id="mobileAvatarImg" src="https://picsum.photos/seed/guest/80/80" alt="avatar" style="width:35px;height:35px;border-radius:50%;">
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end p-3">
+          <div class="text-center mb-2">
+          <a href="user.html"><div id="navUserName" class="small-muted">Invité</div></a>
+          </div>
+          <li><hr></li>
+          <li><a class="dropdown-item" id="menuFavsLink">Mes favoris ❤️</a></li>
+          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">Connexion 🔐</a></li>
+          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal">Inscription</a></li>
+          <li><hr></li>
+          <li><a class="dropdown-item text-danger" id="logoutLink">Se déconnecter</a></li>
+        </ul>
+      </div>
+
+      <!-- Bouton menu -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <!-- MENU -->
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item col-3 col-sm-3 col-md-2 col-lg-4 text-lg-center text-start "><a class="nav-link" href="index.html">Accueil</a></li>
+        <li class="nav-item col-3 col-sm-3 col-md-2 col-lg-4 text-lg-center text-start"><a class="nav-link" href="propos.html">À propos</a></li>
+        <li class="nav-item col-6 col-sm-5 col-md-3 col-lg-6 text-lg-center text-start"><a class="nav-link" href="centre.html">Centre technique</a></li>
+      </ul>
+
+      <!-- Avatar Desktop -->
+      <div class="dropdown d-none  d-lg-block">
+        <button class="btn btn-transparent dropdown-toggle d-flex align-items-center gap-2" id="userDropdown" data-bs-toggle="dropdown">
+          <img id="navAvatarImg" src="https://picsum.photos/seed/guest/80/80" style="width:38px;height:38px;border-radius:50%;">
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end p-3">
+          <div class="text-center mb-2">
+            <img id="navAvatarLargeDesk" class="nav-avatar-large mb-1" src="https://picsum.photos/seed/guest/120/120" alt="">
+           <a href="user.html"><div id="navUserNameDesk">Invité</div> </a> 
+          </div>
+          <li><hr></li>
+          <li><a class="dropdown-item" id="menuFavsLinkDesk">Mes favoris ❤️</a></li>
+          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">Connexion 🔐</a></li>
+          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal">Inscription</a></li>
+            <li><hr></li>
+          <li><a class="dropdown-item text-danger" id="logoutLinkDesk">Se déconnecter</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</nav>
+
+
+  <!-- Top small carousel (2 profils per slide) -->
+  <div class="container mt-3">
+    <div id="topCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2200">
+      <div id="topCarouselInner" class="position-relative w-100">
+
+      </div>
+      <button class="carousel-control-prev" type="button"
+      style="width:55px; height:55px; display:flex; justify-content:center; align-items:center;
+             position:absolute; top:50%; transform: translateY(-50%) !important; background:none; border:none;">
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none"
+           stroke="rgba(255, 122, 149, 1)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+  </button>
+  
+  <button class="carousel-control-next" type="button"
+      style="width:55px; height:55px; display:flex; justify-content:center; align-items:center;
+             position:absolute; top:50%; transform: translateY(-50%) !important; background:none; border:none;">
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none"
+           stroke="rgba(255, 122, 149, 1)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 6 15 12 9 18"></polyline>
+      </svg>
+  </button>
+  
+
+     </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="container my-4">
+
+    <!-- Recherche -->
+   <section class="search-card mb-4 ">
+     
+     <h3 class="mb-4 text-center small-muted">Rechercher un profil</h3>
+
+  <div class="row g-2 align-items-center">
+
+    <div class="position-relative">
+      <input id="filterVille" class="form-control bg-transparent" placeholder="Ville (ex: Douala)">
+      <div id="villeSuggestions" class="suggestions-box" style="z-index: 100;"></div>
+    </div>
+    
+    <div class="position-relative mt-2">
+      <input id="filterQuartier" class="form-control bg-transparent" placeholder="Quartier (ex: Bonapriso)">
+      <div id="quartierSuggestions" class="suggestions-box" style="z-index: 100;"></div>
+    </div>
+    
+    <div class="row g-2 mt-2">
+      <div class="col-6">
+        <label>Âge min</label>
+        <input type="number" id="ageMin" class="form-control" placeholder="21" min="21">
+      </div>
+      <div class="col-6">
+        <label>Âge max</label>
+        <input type="number" id="ageMax" class="form-control" placeholder="45" max="45">
+      </div>
+    </div>
+
+    <!-- 🔥 Nouveau filtre corpulence -->
+    <div class="col-12 mt-2">
+      <select id="filterCorpulence" class="form-select bg-transparent">
+        <option value="">Corpulence (toutes)</option>
+        <option value="skinny">Skinny</option>
+        <option value="potelé">Potelé</option>
+      </select>
+    </div>
+
+    <div class="col-md-2 text-end">
+      <button id="btnFilter" class="btn btn-accent w-100">Rechercher</button>
+    </div>
+
+  </div>
+
+  <div class="text-muted mt-2">Cliquez sur une carte pour ouvrir le profil.</div>
+</section>
+
+
+    <!-- Annonces -->
+    <section id="annonces" class="mb-5">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Profils</h3>
+        <div class="text-muted"><span class="mt-2 fw-bold" id="resultCount"></span>
+</div>
+      </div>
+      <div id="feed" class="row g-2 w-100 m-0 p-0">
+
+         <div id="vip" class="row g-1 w-100 m-0 p-0"></div>
+         <div id="premium" class="row g-1 w-100 m-0 p-0"></div>
+         <div id="avant" class="row g-1 w-100 m-0 p-0"></div>
+         <div id="classique" class="row g-1 w-100 m-0 p-0"></div>
+
+      </div>
+
+      <nav class="mt-4 ">
+        <ul id="pagination" class="pagination  justify-content-center "></ul>
+      </nav>
+    </section>
+
+    <!-- ✅ SECTION SÉCURITÉ & BONNE UTILISATION TAKE IT -->
+<section class="container my-4 p-3 p-md-4 rounded shadow-sm"
+style="background:#fff6fb;border-left:6px solid #ff0c85;">
+  <div class="d-flex flex-column flex-md-row align-items-start">
+    
+    <div>
+      <h5 class="fw-bold" style="color:#ff0c85;"> ⚠️ Utilisez Take It💞 avec prudence </h5>
+      <p class="mb-2" style="font-size:0.95rem;">
+        Take It est un espace de rencontres exotiques et élégantes.  
+        Veuillez toujours rester respectueux, éviter les comportements inappropriés
+        et ne jamais envoyer d’argent sans garantie.
+      </p>
+
+      <p class="mb-2" style="font-size:0.95rem;">
+        En cas de doute, d’arnaque ou comportement suspect, contactez immédiatement notre
+        <a href="centre.html"
+           class="fw-bold text-decoration-underline"
+           style="color:#ff0c85;">
+          centre technique
+        </a>.
+      </p>
+
+      <small class="text-muted fst-italic">
+        Votre sécurité et votre confort sont notre priorité 🌺
+      </small>
+    </div>
+  </div>
+</section>
+
+    
+  </main>
+    
+    <!-- 🌸 FOOTER UNIVERSEL TAKE IT 🌸 -->
+<footer class="mt-2" style="background:transparent; color:#0b1220; ">
+  <div class="container py-2">
+
+    <div class="row g-4">
+
+      <!-- Logo & Slogan -->
+      <div class="col-md-4">
+        <h3 class="fw-bold brand">Take It 💞</h3>
+        <p class=" text-muted">Rencontres exotiques & élites — vivez la passion, l’élégance & le mystère.</p>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="text-center  text-muted pt-2 mt-2 border-top border-light">
+      <small>© 2025 Take It — Tous droits réservés | Site exotique premium 🌺</small><br>
+       </div>
+
+  </div>
+</footer>
+
+    
+
+  
+<!-- MODALS -->
+  <!-- Signup  -->
+  <div class="modal fade" id="signupModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header mColor"><h5> S'inscrire </h5>
+      <button type="button" class="btn-close-custom text-white" data-bs-dismiss="modal">
+        ✖
+      </button>
+</button>
+</div>
+    <div class="modal-body">
+      <form id="signupForm">
+          
+          <div class="alert py-2 small mb-2">
+            🔒 <strong>Règle de la plateforme :</strong><br>
+            👩 <strong>Professionnel :</strong> réservé aux filles à la recherche de l’âme sœur.<br>
+            👨 <strong>Normal :</strong> réservé uniquement aux hommes qui souhaitent ajouter certains profils aux favoris.
+          </div>
+          Type de compte
+          <select id="suRole" class="form-select mb-2">
+            <option value="userNormal">👨 Normal</option>
+            <option value="userPro">👩 Professionnel</option>       
+          </select>
+        <div class="mb-2">
+         <input id="suName" class="form-control " placeholder="Nom d'utilisateur" required>
+            <div id="nameError" class="text-danger small mt-1" style="display:none;">
+              ❗ Trop long
+            </div>
+          </div>
+
+     <div class="mb-2">
+        <input id="suAge" type="number" class="form-control" placeholder="Âge" required>
+        <div id="ageError" class="text-danger small mt-1" style="display:none;">
+      ❗ Accès non autorisé aux mineurs
+       </div>
+      </div>
+        <!-- Email -->
+  <div class="mb-2">
+     <input type="email" id="email" class="form-control" placeholder="Entrez votre email" required>
+    <div id="emailError" class="text-danger small mt-1" style="display:none;">
+      ❗ Email invalide
+    </div>
+  </div>
+
+  <div class="mb-2">
+   <input id="suWhats" class="form-control" placeholder="WhatsApp (ex: +2376...)" required>
+   <div id="phoneError" class="text-danger small mt-1" style="display:none;">
+    ❗ Numéro incorrect
+  </div>
+  
+  <div id="phoneSuccess" class="text-success small mt-1" style="display:none;">
+    ✔  Numéro valide
+  </div>
+</div>
+
+   <input id="suville" class="form-control mb-2" placeholder="ville" required>
+    <input id="suquartier" class="form-control mb-2" placeholder="quartier" required>
+    <!-- Conteneur à masquer -->
+<div id="proFields">
+   Emplacement exact
+    <input id="surepere" class="form-control mb-2" placeholder="Exemple tunnel ndokoti">
+    
+    Corpulence 
+    <select id="signFilterCorpulence" class="form-select  mb-2">
+        <option value="skinny">Skinny</option>
+        <option value="potelé">Potelé</option>
+    </select>
+</div>
+  
+<!-- mot de passe -->
+
+<div class="col-md-6 mb-2">
+  <div class="position-relative">
+   <input type="password" id="password" class="form-control mb-2" placeholder="mot de passe" required>
+  <span id="togglePassword" 
+        class="position-absolute top-50 end-0 translate-middle-y me-2"
+        style="cursor:pointer; font-size:18px;">
+    🙈
+  </span>
+</div>
+  <!-- A placer juste sous <input id="password"> -->
+<div id="passwordHelp" class="small mt-2 d-none" style="font-size:0.9rem;">
+<div id="passwordStrength" style="margin-bottom:6px;">
+<div id="pwLabel" style="font-weight:600;">Force du mot de passe : <span id="pwStatus">—</span></div>
+<div style="height:8px; background:#e9ecef; border-radius:6px; overflow:hidden; margin-top:6px;">
+<div id="pwBar" style="width:0%; height:100%; background:#e74c3c; transition:width .25s ease;"></div>
+</div>
+</div>
+
+<div id="pwCriteria" style="line-height:1.5;">
+<div><span id="pwLen" style="margin-right:8px">❌</span> Au moins <strong>8 caractères</strong></div>
+<div><span id="pwLower" style="margin-right:8px">❌</span> Une <strong>lettre minuscule</strong></div>
+<div><span id="pwUpper" style="margin-right:8px">❌</span> Une <strong>lettre majuscule</strong></div>
+<div><span id="pwDigit" style="margin-right:8px">❌</span> Un <strong>chiffre</strong></div>
+<div><span id="pwSpecial" style="margin-right:8px">❌</span> Un <strong>caractère spécial</strong> (ex: !@#$%)</div>
+</div>
+
+<div id="pwTip" class="text-muted mt-2" style="font-size:0.85rem;">
+Astuce : combine des mots, ajoute une majuscule, un chiffre et un symbole — évite les mots du dictionnaire.
+</div>
+</div>
+ <!-- fin password -->
+</div>
+
+<input type="password" id="confirmPassword" class="form-control mb-2 " placeholder="Confirmer mot de passe" required>
+
+<div id="passwordError" class="text-danger small mb-1" style="display:none;">
+  ❗ Les mots de passe ne correspondent pas
+</div>
+        <div class="form-check mb-2">
+  <input class="form-check-input" type="checkbox" id="acceptRules" required>
+  <label class="form-check-label small" for="acceptRules">
+    J’accepte de respecter les règles d’utilisation du site, de me comporter avec respect envers les autres utilisateurs et de ne pas utiliser cette plateforme à des fins d’arnaque ou de nuisance. En cas d’abus, mon compte pourra être suspendu.
+  </label>
+</div>
+
+        <div class="text-end"><button class= "signButton btn" id="inscription">S'incrire</button></div>
+      </form>
+    </div>
+  </div></div></div>
+
+    
+  <!-- Login -->
+  <div class="modal fade" id="loginModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header mColor"><h5> Se connecter </h5>
+      <button type="button" class="btn-close-custom text-white" data-bs-dismiss="modal">
+        ✖
+      </button>
+ </div>
+    <div class="modal-body">
+      <form id="loginForm">
+        <select id="liRole" class="form-select mb-2"><option value="userNormal">Normal</option><option value="userPro">Professionnel</option></select>
+        <input type="number"id="liName" class="form-control mb-2" placeholder="Numero de telephone" required>
+        <div class="position-relative">
+          <input 
+            type="password" 
+            id="loginPassword"
+            class="form-control mb-2 pe-5" 
+            placeholder="Mot de passe" 
+            required
+          >
+        
+          <span 
+            id="toggleLoginPassword"
+            class="position-absolute top-50 end-0 translate-middle-y me-3"
+            style="cursor:pointer; font-size:20px;"
+          >
+          🙈
+          </span>
+        </div>
+             <div class="text-end"><button class="btn loginButton">Connexion</button></div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+    
+</div>
+
+  <!-- Profile Modal -->
+  <div class="modal fade " id="profilModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered  modal-dialog-scrollable">
+      <div class="modal-content">
+    <div class="modal-header small-muted"  style="background: var(--bg)">
+  <h5 id="profilName" style="width:90%; flex-direction: row ; flex-wrap:wrap" >
+
+    <!-- Nom (déjà rempli en JS) -->         <!-- BADGE VIP/PREMIUM -->
+    <div> <span   id="profilNameText"></span>   <span id="profilBadge" class="nowrap"></span> </div>
+    
+   
+    
+
+  </h5>
+  <button type="button" class="btn-close-custom small-muted" data-bs-dismiss="modal">
+    ✖
+  </button>
+</div>
+
+<div class="modal-body" id="profilModalBody" style="background: var(--bg)">
+  <div class="col-md-6 col-md-12 col-lg-12">
+  <div id="profileCarousel" class="carousel slide" data-bs-interface="false">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#profileCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#profileCarousel" data-bs-slide-to="1"></button>
+          </div>
+
+    <div class="carousel-inner rounded">
+      <div class="carousel-itemp  carousel-item active">
+        <img id="profilPhoto1" class="d-block w-100" style="height:100%;object-fit:cover;">
+      </div>
+      <div class="carousel-itemp  carousel-item">
+        <img id="profilPhoto2" class="d-block w-100" style="height:100%;object-fit:cover;">
+      </div>
+     
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#profileCarousel" data-bs-slide="prev">
+     <svg width="38" height="38" viewBox="0 0 24 24" fill="none"
+           stroke="rgba(255, 122, 149, 1)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>  
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#profileCarousel" data-bs-slide="next">
+       <svg width="38" height="38" viewBox="0 0 24 24" fill="none"
+           stroke="rgba(255, 122, 149, 1)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 6 15 12 9 18"></polyline>
+      </svg>  
+    </button>
+  </div>
+</div>
+
+
+      <div class="row mt-2">
+        <div class="col-md-6 col-md-12 col-lg-12">
+  <div class="d-flex justify-content-between align-items-center">
+      <h6 class="m-0 text-decoration-underline text-dark fw-bold">Détails :</h6>
+      <p class="m-0 fw-bold">
+       <span class="text-danger"> ❤️ </span> <span id="favoritesCount" class="small-muted" >12345670</span><span class="text-dark"> ajouts </span>
+      </p>
+  </div>
+  
+  <p id="profilDetails" class=" text-dark fw-bold mt-2"></p>
+</div>
+
+
+        <div class="col-md-6 col-md-12 col-lg-12">
+          <h6><u class="text-dark fw-bold">Services & Options :</u></h6>
+          <!-- Services d'exemple -->
+          <form id="servicesForm">
+            <div class="service-row">
+              <div>
+                <input type="radio" name="service" id="srv1" value="5000">
+                <label for="srv1">Massage relaxant</label>
+              </div>
+              <div class="small-muted d-none" id="prixSrv1">5 000 F</div>
+            </div>
+            
+            <div class="service-row">
+              <div>
+                <input type="radio" name="service" id="srv2" value="8000">
+                <label for="srv2">Dîner romantique</label>
+              </div>
+              <div class="small-muted d-none" id="prixSrv2">8 000 F</div>
+            </div>
+            
+            <div class="service-row">
+              <div>
+                <input type="radio" name="service" id="srv3" value="4000">
+                <label for="srv3">Photoshoot</label>
+              </div>
+              <div class="small-muted d-none" id="prixSrv3">4 000 F</div>
+            </div>
+                <div id="domicile"  style="display:none" > <div class="service-row"><div><input type="checkbox" id="deliveryOpt" value="0"> <label for="deliveryOpt" ><strong>Rencontre à domicile</strong></label></div></div></div>
+              <input id="deliveryPlace" class="form-control mb-2 " placeholder="entrez votre adresse" style="display:none" required>
+            
+
+  <div id="nb" class="text-danger small fw-bold mt-2 ">
+               <u>NB :</u> Commandez Yango pour aller chercher votre Invité.
+</div>         
+            
+
+            <div class="mt-2 text-end d-none"  style="color:var(--muted)"><strong>Total : <span id="totalPrice">0</span> F</strong></div>
+            <div class="mt-3 d-flex gap-2 justify-content-end">
+              <button id="favToggleBtn" class="btn btn-outline-danger me-auto">♡ Ajouter aux favoris</button>
+              <button id="sendWhatsappBtn" class="btn btn-success" disabled>Envoyer sur WhatsApp</button>
+            </div>
+            
+                  <p class="mt-3 text-center fw-bold small">
+⚠️ En cas de faux profil ou d'arnaque, contactez immédiatement le 
+<a href="centre.html" class="fw-bold text-danger">Centre Technique</a>
+</p>
+          </form>
+        
+        </div>
+      </div>
+
+      <hr class="my-3">
+      <h6 class="text-center fw-bold small-muted">Profil(s) Similaire(s) Proche(s)</h6>
+      <hr class="my-3">
+      
+        <div id="similarList"></div>
+       
+  </div>
+</div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  
+
+  // reinitialise le modal du formulaire d'inscription
+    const signupModal = document.getElementById("signupModal");
+    const password = document.getElementById("password");
+ 
+// Quand le modal se ferme → on réinitialise tout
+signupModal.addEventListener("hidden.bs.modal", () => {
+   const togglePassword = document.getElementById("togglePassword");
+  const Password = document.getElementById("password");
+    const infoPass = document.getElementById("passwordHelp");
+
+  password.type = "password";
+    togglePassword.textContent =  "🙈"; // œil fermé
+ 
+infoPass.classList.add("d-none");
+
+// ✅ Réinitialisation complète du formulaire
+document.getElementById("signupForm").reset();
+
+
+// ✅ Masquer les erreurs
+const emailError = document.getElementById("emailError");
+const phoneError = document.getElementById("phoneError");
+const phoneSuccess = document.getElementById("phoneSuccess");
+const ageError = document.getElementById("ageError");
+const error = document.getElementById("passwordError");
+const nameError = document.getElementById("nameError");
+
+  
+if (emailError) emailError.style.display = "none";
+if (phoneError) phoneError.style.display = "none";
+if (phoneSuccess) phoneSuccess.style.display = "none";
+if (ageError) ageError.style.display = "none";
+if (error) error.style.display = "none";
+if (nameError) nameError.style.display = "none";
+if(infoPass) infopass.style.display ="none";
+  
+// ✅ Masquer les champs PRO
+const proFields = document.getElementById("proFields");
+if (proFields) proFields.style.display = "none";
+
+// ✅ Désactiver le bouton d'inscription
+document.getElementById("inscription").disabled = true;
+
+});
+
+
+    
+    // js pour reset le form de connection a la fermeture du modal
+    
+    const loginModal = document.getElementById("loginModal");
+
+// Quand le modal loginModal se ferme → reset complet
+loginModal.addEventListener("hidden.bs.modal", () => {
+      const loginBtn = document.querySelector(".loginButton");
+
+     const toggleLoginPassword = document.getElementById("toggleLoginPassword");
+      const loginPassword = document.getElementById("loginPassword");
+        // ✅ État initial
+        loginBtn.disabled = true;
+        loginPassword.type = "password";
+        toggleLoginPassword.textContent =  "🙈"; // œil fermé
+    
+
+
+  // Réinitialiser le formulaire
+  document.getElementById("loginForm").reset();
+});
+
+    
+    
+  //js pour bouton flottan vers le haut
+ const btnTop = document.getElementById("btnTop");
+
+window.addEventListener("scroll", function () {
+  if (window.scrollY > 300) {
+    btnTop.style.display = "block";
+    btnTop.style.opacity = "1";
+  } else {
+    btnTop.style.opacity = "0";
+    setTimeout(()=> btnTop.style.display = "none", 300);
+  }
+});
+
+// Optionnel: scroll smooth vers le top
+btnTop.addEventListener("click", (e)=>{
+  e.preventDefault();
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+  
+  // code pour afficher le mot de passe a l'insciption
+  const passwordInput = document.getElementById("password");
+const togglePassword = document.getElementById("togglePassword");
+
+togglePassword.addEventListener("click", () => {
+  const type = passwordInput.type === "password" ? "text" : "password";
+  passwordInput.type = type;
+
+  // change eye icon
+  togglePassword.textContent = type === "password" ? "🙈" : "🙉";
+});
+
+  
+  /* ========== Données & stockage ========== */
+  const LS_USERS = 'takeit_users_v3';
+  const LS_FAVORITES = 'takeit_favs_v3';
+  const LS_CURRENT = 'takeit_current_v3';
+
+  const sampleNames = [
+    "Amina ta masseuse de luxe","Marc","Sandra","Kevin","Chloé","Paul","Leïla","Samuel","Nora","Jean",
+    "Fatou","Dieudonné","Mireille","Olivier","Rita","Brice","Yvonne","Lionel","Sophie","Ange",
+    "Benedict","Carla","David","Estelle","Franck","Gisèle","Henri","Isabelle","Jacques","Khadija"
+  ];
+  const cities = ["Douala","Yaoundé","Bafoussam","Kribi","Limbé","Bertoua","Ngaoundéré","Garoua"];
+  const quarters = ["Akwa","Bonapriso","Makepe","Omnisport","Bastos","Nlongkak","Bonamoussadi","Logbessou","Bastos Sud","Bonendale"];
+  const reperes = ["santa lucia","KMC","contenaire rouge","eglise des nations","entre bille","montana city","tradex","enté gendarmerie","7 iem jour","bonne fontaine"];
+  const typeComptes = ["PREMIUM","VIP","CLASSIQUE"] ;
+  const enAvants = ["true","false"] ;
+  const enLignes = ["true","false"] ;
+  const deplacement = ["oui","non"] ;
+  const corpulences = ["skinny","potelé"] ;
+  function rand(a){return a[Math.floor(Math.random()*a.length)];}
+
+  const POSTS = [];
+  for(let i=1;i<=600;i++){
+    const name = sampleNames[(i - 1) % sampleNames.length];
+    const ville = rand(cities);
+    const quartier = rand(quarters);
+    const repere = rand(reperes);
+    const typeCompte = rand(typeComptes);
+    const enAvant = rand(enAvants) ;
+    const online = rand(enLignes) ;
+    const deplace = rand(deplacement) ;
+    const corpulence = rand(corpulences) ;
+    const age = 21 + (i % 23);
+    POSTS.push({
+      id: i,
+      name,
+      age,
+      ville,
+      quartier,
+      repere,
+      typeCompte,
+      enAvant,
+      online,
+      corpulence,
+      deplace,
+      img1: `https://picsum.photos/seed/takeit${i}/420/320`,
+      img2: `https://picsum.photos/seed/takeitb${i}/420/320`,
+      
+      whatsapp: '+2376' + (55288527 + i).toString().slice(-8),
+    });
+  }
+
+ 
+
+   
+
+// afficher et cacher l'emplacement
+  const checkopt = document.getElementById("deliveryOpt");
+  const place = document.getElementById("deliveryPlace");
+  const nb = document.getElementById("nb");
+
+      
+
+// Fonction pour mettre à jour l'affichage
+function updatePlaceVisibility() {
+    if (checkopt.checked) {
+        place.style.display = "block";
+        nb.style.display = "block";
+    } else {
+        
+        place.style.display = "none";
+        nb.style.display = "none";
+        place.value = "";
+    }
+}
+
+// Quand on coche/décoche
+checkopt.addEventListener("change", updatePlaceVisibility);
+
+// Quand le modal s’ouvre → on vérifie si la case était déjà cochée
+document.getElementById("profilModal").addEventListener("shown.bs.modal", () => {
+    updatePlaceVisibility();
+  updateWhatsappButtonState()
+});
+
+    
+    //afficher le nombre de temps il ya eu publication
+//     function timeAgo(date) {
+//   const seconds = Math.floor((Date.now() - date) / 1000);
+
+//   if (seconds < 60) return `publié il y a ${seconds}s`;
+//   const minutes = Math.floor(seconds / 60);
+//   if (minutes < 60) return `publié il y a ${minutes} min`;
+//   const hours = Math.floor(minutes / 60);
+//   if (hours < 24) return `publié il y a ${hours} h`;
+//   const days = Math.floor(hours / 24);
+//   return `publié il y a ${days} j`;
+// }
+
+    
+  let users = JSON.parse(localStorage.getItem(LS_USERS) || '[]');
+  let favoritesByUser = JSON.parse(localStorage.getItem(LS_FAVORITES) || '{}');
+  let currentUser = JSON.parse(localStorage.getItem(LS_CURRENT) || 'null');
+
+  const PER_PAGE = 18;
+  let currentPage = 1;
+  let currentFiltered = POSTS.slice();
+
+  /* ========== Utils ========== */
+  function saveUsers(){ localStorage.setItem(LS_USERS, JSON.stringify(users)); }
+  function saveFavorites(){ localStorage.setItem(LS_FAVORITES, JSON.stringify(favoritesByUser)); }
+  function setCurrent(u){ currentUser = u; localStorage.setItem(LS_CURRENT, JSON.stringify(currentUser)); updateNavAvatar(); renderFavs(); renderFeed(); renderAuthUI(); }
+  function formatNumber(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g," "); }
+
+   /* ========== Top carousel (2 profiles per slide, left→right) ========== */
+
+   function buildTopCarousel() {
+  const inner = document.getElementById('topCarouselInner');
+  inner.innerHTML = '';
+
+  const vipList = sortOnlineFirst(POSTS.filter(p => p.typeCompte === "VIP" && p.enAvant !== "true"));
+  const premiumList = sortOnlineFirst(POSTS.filter(p => p.typeCompte === "PREMIUM" && p.enAvant !== "true"));
+  const avantList = sortOnlineFirst(POSTS.filter(p => p.enAvant === "true"));
+  const classiqueList = sortOnlineFirst(
+    POSTS.filter(p => p.typeCompte !== "VIP" && p.typeCompte !== "PREMIUM" && p.enAvant !== "true")
+  );
+
+  const ordered = [...vipList, ...premiumList, ...avantList, ...classiqueList];
+  const FULL = [...ordered, ...ordered];
+
+  const GAP = 10;
+  let index = 0;
+  let isAnimating = false;   // ✅ BLOQUE les doubles scrolls
+  let autoSlide = null;
+
+  // ----------------------------
+  // GÉNÉRATION DES CARTES
+  // ----------------------------
+  FULL.forEach(p => {
+    const col = document.createElement("div");
+    col.className = "col-6 col-sm-4 col-md-3 col-lg-3 p-0 topslidet";
+
+    let badgeHTML = "";
+    if (p.typeCompte === "VIP")
+      badgeHTML = `<span class="badge-vip position-absolute top-0 start-0 m-2 px-2 py-1">👑 VIP</span>`;
+    else if (p.typeCompte === "PREMIUM")
+      badgeHTML = `<span class="badge-premium position-absolute top-0 start-0 m-2 px-2 py-1">⭐ PREMIUM</span>`;
+    else if (p.enAvant === "true")
+      badgeHTML = `<span class="badge-avant position-absolute top-0 start-0 m-2 px-2 py-1">⭐ En avant</span>`;
+
+    const onlineBadge = p.online === "true"
+      ? `<span class="online-dot position-absolute top-0 end-0 m-2"></span>`
+      : "";
+
+    col.innerHTML = `
+      <div class="card topCard card-prof position-relative" onclick="openProfileModal(${p.id})" style="cursor:pointer;border:none;">
+        ${badgeHTML}
+        ${onlineBadge}
+        <img src="${p.img1}" class="avatar img-fluid" alt="${p.name}">
+        <div class="card-body overlay-info">
+          <div class="fw-bold small-muted d-flex justify-content-between w-100" style="font-size:1.05em">
+            ${p.name}, ${p.age} ans
+          </div>
+          <div class="text-light" style="font-size:15px;">${p.quartier}, ${p.ville}</div>
+        </div>
+      </div>`;
+    inner.appendChild(col);
+  });
+
+  // ----------------------------
+  // LARGEUR CARTE
+  // ----------------------------
+  function computeCardWidth() {
+    const card = inner.children[0];
+    return card ? card.offsetWidth + GAP : 180;
+  }
+
+  let CARD_WIDTH = computeCardWidth();
+  window.addEventListener("resize", () => CARD_WIDTH = computeCardWidth());
+
+  // ----------------------------
+  // SLIDE NEXT PROTÉGÉ
+  // ----------------------------
+  
+     
+     
+     function slideNextInternal(speed = 0.25) {
+ let isAnimating = false;
+let autoSlide = null;
+
+  index++;
+
+  inner.style.transition = `transform ${speed}s ease`;
+  inner.style.transform = `translateX(-${index * CARD_WIDTH}px)`;
+
+  setTimeout(() => {
+    if (index >= ordered.length) {
+      inner.style.transition = "none";
+      index = 0;
+      inner.style.transform = "translateX(0)";
+    }
+    isAnimating = false;
+  }, speed * 1000 + 20);
+}
+
+
+  // ----------------------------
+  // SLIDE PREV PROTÉGÉ
+  // ----------------------------
+  function slidePrevInternal(speed = 0.25) {
+  if (isAnimating) return;
+  isAnimating = true;
+
+  index--;
+  if (index < 0) index = ordered.length - 1;
+
+  inner.style.transition = `transform ${speed}s ease`;
+  inner.style.transform = `translateX(-${index * CARD_WIDTH}px)`;
+
+  setTimeout(() => {
+    isAnimating = false;
+  }, speed * 1000 + 20);
+}
+
+  // ✅ Boutons HTML PROTÉGÉS
+ const prevBtn = document.querySelector(".carousel-control-prev");
+const nextBtn = document.querySelector(".carousel-control-next");
+
+prevBtn.addEventListener("pointerdown", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  slidePrevImmediate();
+});
+
+nextBtn.addEventListener("pointerdown", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  slideNextImmediate();
+});
+
+
+
+  // ----------------------------
+  // AUTO SLIDE STABLE
+  // ----------------------------
+  function startAutoSlide() {
+  stopAutoSlide();
+  autoSlide = setInterval(() => {
+    slideNextInternal(0.6); // plus fluide
+  }, 3000);
+}
+
+function stopAutoSlide() {
+  if (autoSlide) clearInterval(autoSlide);
+}
+
+function slideNextImmediate() {
+  stopAutoSlide();
+  isAnimating = false; // 🔥 on débloque
+  slideNextInternal(0.15); // ultra rapide
+  startAutoSlide();
+}
+
+function slidePrevImmediate() {
+  stopAutoSlide();
+  isAnimating = false; // 🔥 on débloque
+  slidePrevInternal(0.15);
+  startAutoSlide();
+}
+
+     
+  startAutoSlide();
+
+  // ----------------------------
+  // SWIPE TOUCH ROBUSTE
+  // ----------------------------
+  let startX = 0;
+
+  inner.addEventListener("touchstart", e => {
+    stopAutoSlide();
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  inner.addEventListener("touchend", e => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > 60) {
+      if (diff > 0) slideNextInternal();
+      else slidePrevInternal();
+    }
+
+    startAutoSlide();
+  }, { passive: true });
+}
+
+     //code pour que les profil en ligne soient en avant
+
+function sortOnlineFirst(list) {
+  return [...list].sort((a, b) => {
+    if (a.online === "true" && b.online !== "true") return -1;
+    if (a.online !== "true" && b.online === "true") return 1;
+    return 0;
+  });
+}
+
+    
+
+  /* ========== Feed rendering & pagination ========== */
+  
+function renderFeed() {
+
+  const containerPremium = document.getElementById('premium'); 
+  const containerVip = document.getElementById('vip'); 
+  const containerAvant = document.getElementById('avant'); 
+  const containerClassique = document.getElementById('classique'); 
+
+  containerPremium.innerHTML = '';
+  containerVip.innerHTML = '';
+  containerAvant.innerHTML = '';
+  containerClassique.innerHTML = '';
+
+  // Séparer chaque catégorie
+  let listVip = currentFiltered.filter(p => p.typeCompte === "VIP");
+  let listPremium = currentFiltered.filter(p => p.typeCompte === "PREMIUM");
+  let listAvant = currentFiltered.filter(p => p.enAvant === "true" && p.typeCompte === "CLASSIQUE");
+  let listClassique = currentFiltered.filter(p => p.typeCompte === "CLASSIQUE" && p.enAvant !== "true");
+
+  // 🔥 Mettre les profils en ligne en premier dans CHAQUE catégorie
+  listVip = sortOnlineFirst(listVip);
+  listPremium = sortOnlineFirst(listPremium);
+  listAvant = sortOnlineFirst(listAvant);
+  listClassique = sortOnlineFirst(listClassique);
+
+  // Pagination sur l’ensemble des profils triés
+  const sortedItems = [...listVip, ...listPremium, ...listAvant, ...listClassique];
+
+  const start = (currentPage - 1) * PER_PAGE;
+  const pageItems = sortedItems.slice(start, start + PER_PAGE);
+
+  pageItems.forEach(post => {
+
+    const card = document.createElement('div');
+    card.className = 'col-6 col-sm-6 col-md-4 col-lg-3';
+
+    let badge = "";
+
+    // VIP
+    if (post.typeCompte === "VIP") {
+      badge = `
+        <span class="badge-vip position-absolute top-0 start-0 m-2 px-2 py-1">
+          👑 VIP
+        </span>
+      `;
+      card.innerHTML = buildCardHTML(post, badge);
+      containerVip.appendChild(card);
+    }
+
+    // PREMIUM
+    else if (post.typeCompte === "PREMIUM") {
+      badge = `
+        <span class="badge-premium position-absolute top-0 start-0 m-2 px-2 py-1">
+          ⭐ PREMIUM
+        </span>
+      `;
+      card.innerHTML = buildCardHTML(post, badge);
+      containerPremium.appendChild(card);
+    }
+
+    // EN AVANT
+    else if (post.enAvant === "true") {
+      badge = `
+        <span class="badge-avant position-absolute top-0 start-0 m-2 px-2 py-1">
+               ⭐ En avant
+        </span>
+      `;
+      card.innerHTML = buildCardHTML(post, badge);
+      containerAvant.appendChild(card);
+    }
+
+    // CLASSIQUE
+    else {
+      card.innerHTML = buildCardHTML(post, "");
+      containerClassique.appendChild(card);
+    }
+
+    // Clic
+    card.querySelector('.card-clickable').onclick = () => openProfileModal(post.id);
+
+  });
+
+  renderPagination();
+}
+
+
+   
+
+    
+// ------------------- TEMPLATE CARD ---------------------
+
+  function buildCardHTML(post, badgeHTML) {
+
+  // Badge ONLINE (toujours défini)
+  let onlineBadge = "";
+
+  if (post.online === "true") {
+    onlineBadge = `
+      <span class="position-absolute online-dot top-0 end-0 m-2 px-2 py-1">
+            
+      </span>
+    `;
+  }
+
+  return `
+    <div class="card card-prof card-clickable position-relative" data-id="${post.id}">
+
+      ${badgeHTML}
+      ${onlineBadge}
+
+      <img src="${post.img1}" class="avatar img-fluid" alt="${post.name}">
+
+      <div class="card-body overlay-info">
+         <div class="fw-bold small-muted d-flex justify-content-between w-100" style="font-size:1.05em">
+            ${post.name}, ${post.age} ans
+           </div>
+
+        <div style="font-size:15px;">${post.ville} — ${post.quartier}</div>
+
+      </div>
+    </div>
+  `;
+}
+
+    
+    
+    
+    
+   
+// pagination
+    
+function scrollToTop() {
+  const annonces = document.getElementById("annonces");
+  if (!annonces) return;
+
+  annonces.scrollIntoView({
+    behavior: "auto", // instantané
+    block: "start"
+  });
+}
+
+
+
+
+  function renderPagination() {
+  const total = currentFiltered.length;
+  const pages = Math.ceil(total / PER_PAGE) || 1;
+  const ul = document.getElementById('pagination');
+  ul.innerHTML = '';
+
+  // Bouton Précédent
+  const liPrev = document.createElement('li');
+  liPrev.className = 'page-item ' + (currentPage === 1 ? 'disabled' : '');
+  liPrev.innerHTML = `<a class="page-link" href="#" onclick="goPage(${currentPage - 1})">Précédent</a>`;
+  ul.appendChild(liPrev);
+
+  // Conteneur horizontal des numéros
+  const numWrap = document.createElement('div');
+  numWrap.className = 'numwrap';
+  ul.appendChild(numWrap);
+
+  // Génération des numéros
+  for (let i = 1; i <= pages; i++) {
+    const li = document.createElement('li');
+    li.className = 'page-item';
+    li.innerHTML = `<a class="page-link ${i === currentPage ? 'active' : ''}" href="#" onclick="goPage(${i})">${i}</a>`;
+    numWrap.appendChild(li);
+  }
+
+  // Bouton Suivant
+  const liNext = document.createElement('li');
+  liNext.className = 'page-item ' + (currentPage === pages ? 'disabled' : '');
+  liNext.innerHTML = `<a class="page-link" href="#" onclick="goPage(${currentPage + 1})">Suivant</a>`;
+  ul.appendChild(liNext);
+
+  // ✅ Toujours garder l'élément actif visible dans la zone scrollable
+  setTimeout(() => {
+    const active = numWrap.querySelector('.active');
+    if (!active) return;
+
+    const activeLeft = active.offsetLeft;
+    const activeRight = activeLeft + active.offsetWidth;
+    const viewLeft = numWrap.scrollLeft;
+    const viewRight = viewLeft + numWrap.clientWidth;
+
+    // Si la page 1 → placer au début sans animation
+    if (currentPage === 1) {
+      numWrap.scrollTo({ left: 0, behavior: 'auto' });
+      return;
+    }
+
+    // Si l'élément est caché à gauche
+    if (activeLeft < viewLeft) {
+      numWrap.scrollTo({
+        left: activeLeft - 0, // petit espace à gauche
+        behavior: 'smooth'
+      });
+      return;
+    }
+
+    // Si l'élément est caché à droite
+    if (activeRight > viewRight) {
+      const scrollPos = activeRight - numWrap.clientWidth + 10; // petit espace à droite
+      numWrap.scrollTo({
+        left: scrollPos,
+        behavior: 'smooth'
+      });
+    }
+  }, 60);
+}
+
+function goPage(n) {
+  const pages = Math.ceil(currentFiltered.length / PER_PAGE) || 1;
+  if (n < 1 || n > pages) return;
+
+  currentPage = n;
+  renderFeed();
+
+  setTimeout(() => {
+    const el = document.getElementById("annonces");
+    if (!el) return;
+
+    const y = el.getBoundingClientRect().top + window.pageYOffset - 10;
+
+    window.scrollTo({
+      top: y,
+      behavior: "smooth"
+    });
+  }, 30);
+}
+
+
+    
+    
+  /* ========== modifié l'etat du favori ========== */
+  document.getElementById("favToggleBtn").addEventListener("onclick", () => {
+  isFavorited = !isFavorited; // inverse l'état (ajout/retrait)
+
+  if (isFavorited) {
+    favBtn.classList.remove("btn-outline-danger");
+    favBtn.classList.add("btn-danger", "text-white");
+    favBtn.innerHTML = "❤ Retirer des favoris";
+  } else {
+    favBtn.classList.remove("btn-danger", "text-white");
+    favBtn.classList.add("btn-outline-danger");
+    favBtn.innerHTML = "♡ Ajouter aux favoris";
+  }
+});
+
+  function renderFavs(){
+    const zone = document.getElementById('myFavs'); zone.innerHTML = '';
+    if(!currentUser){ zone.innerHTML = '<div class="small-muted">Connectez-vous pour voir vos favoris.</div>'; return; }
+    const favIds = favoritesByUser[currentUser.username] || [];
+    if(favIds.length===0){ zone.innerHTML = '<div class="small-muted">Vous n\'avez pas encore de favoris.</div>'; return; }
+    favIds.forEach(id => {
+      const p = POSTS.find(x=>x.id===id);
+      if(!p) return;
+      const col = document.createElement('div'); col.className='col-md-4';
+      col.innerHTML = `<div class="card card-prof">
+        <img src="${p.img1}" class="avatar" alt="${p.name}">
+        <div class="card-body">
+          <h5>${p.name}, <small class="small-muted">${p.age} ans</small></h5>
+          <div class="small-muted">${p.ville} — ${p.quartier}</div>
+          <div class="mt-2 d-flex gap-2">
+            <button class="btn btn-outline-dark btn-sm" onclick="openProfileModal(${p.id})">Voir</button>
+            <button class="btn btn-danger btn-sm" onclick="removeFav(${p.id})">Retirer</button>
+          </div>
+        </div></div>`;
+      zone.appendChild(col);
+    });
+  }
+  function removeFav(id){ if(!currentUser) return; favoritesByUser[currentUser.username] = (favoritesByUser[currentUser.username]||[]).filter(x=>x!==id); saveFavorites(); renderFavs(); renderFeed(); }
+
+ 
+
+ /* ========== Filter button ========== */
+ /* ================= AUTOCOMPLETE VILLE / QUARTIER ================= */
+
+// Inputs
+const villeInput = document.getElementById("filterVille");
+const quartierInput = document.getElementById("filterQuartier");
+
+// Boxes (doivent exister dans le HTML)
+const villeBox = document.getElementById("villeSuggestions");
+const quartierBox = document.getElementById("quartierSuggestions");
+
+// 🔹 Villes uniques
+const villes = [...new Set(POSTS.map(p => p.ville).filter(Boolean))];
+
+// 🔹 Quartiers par ville
+const quartiersParVille = {};
+POSTS.forEach(p => {
+    if (!p.ville || !p.quartier) return;
+
+    if (!quartiersParVille[p.ville]) {
+        quartiersParVille[p.ville] = new Set();
+    }
+    quartiersParVille[p.ville].add(p.quartier);
+});
+
+// Convert Set → Array
+Object.keys(quartiersParVille).forEach(v => {
+    quartiersParVille[v] = [...quartiersParVille[v]];
+});
+
+// 🔹 Fonction générique de suggestions
+function showSuggestions(input, box, dataList, onSelect) {
+    const value = input.value.trim().toLowerCase();
+    box.innerHTML = "";
+
+    if (!value) {
+        box.style.display = "none";
+        return;
+    }
+
+    const matches = dataList
+        .filter(item => item.toLowerCase().startsWith(value))
+        .slice(0, 8);
+
+    if (!matches.length) {
+        box.style.display = "none";
+        return;
+    }
+
+    matches.forEach(item => {
+        const div = document.createElement("div");
+        div.textContent = item;
+
+        div.addEventListener("click", () => {
+            onSelect(item);
+            box.style.display = "none";
+            autoFilter(); // 🔥 filtre immédiat
+        });
+
+        box.appendChild(div);
+    });
+
+    box.style.display = "block";
+}
+
+// 🔹 Autocomplete VILLE
+villeInput.addEventListener("input", () => {
+    showSuggestions(
+        villeInput,
+        villeBox,
+        villes,
+        selectedVille => {
+            villeInput.value = selectedVille;
+
+            // RESET quartier quand la ville change
+            quartierInput.value = "";
+            quartierBox.style.display = "none";
+        }
+    );
+});
+
+// 🔹 Autocomplete QUARTIER (dépendant de la ville)
+quartierInput.addEventListener("input", () => {
+    const selectedVille = villeInput.value.trim();
+
+    if (!selectedVille || !quartiersParVille[selectedVille]) {
+        quartierBox.style.display = "none";
+        return;
+    }
+
+    showSuggestions(
+        quartierInput,
+        quartierBox,
+        quartiersParVille[selectedVille],
+        selectedQuartier => {
+            quartierInput.value = selectedQuartier;
+        }
+    );
+});
+
+// 🔹 Fermer suggestions au clic extérieur
+document.addEventListener("click", e => {
+    if (!villeInput.contains(e.target)) villeBox.style.display = "none";
+    if (!quartierInput.contains(e.target)) quartierBox.style.display = "none";
+});
+
+
+/* ================= FILTRAGE (TON CODE, INTACT) ================= */
+
+document.getElementById("btnFilter").addEventListener("click", filterProfiles);
+
+function autoFilter() {
+    const ville = villeInput.value.trim().toLowerCase();
+    const quartier = quartierInput.value.trim().toLowerCase();
+    const corp = document.getElementById("filterCorpulence").value.trim().toLowerCase();
+    const ageMin = document.getElementById("ageMin").value.trim();
+    const ageMax = document.getElementById("ageMax").value.trim();
+
+    const allEmpty =
+        ville === "" &&
+        quartier === "" &&
+        corp === "" &&
+        ageMin === "" &&
+        ageMax === "";
+
+    if (allEmpty) {
+        currentFiltered = [...POSTS];
+        currentPage = 1;
+        renderFeed();
+        document.getElementById("resultCount").innerText = "";
+        return;
+    }
+
+    filterProfiles(false);
+
+    document.getElementById("resultCount").innerText =
+        `${currentFiltered.length} profil(s) trouvé(s)`;
+}
+
+function filterProfiles(showCount = true) {
+    const ville = villeInput.value.trim().toLowerCase();
+    const quartier = quartierInput.value.trim().toLowerCase();
+    const corp = document.getElementById("filterCorpulence").value.trim().toLowerCase();
+
+    const ageMin = parseInt(document.getElementById("ageMin").value) || 21;
+    const ageMax = parseInt(document.getElementById("ageMax").value) || 45;
+
+    currentFiltered = POSTS.filter(profile => {
+        const matchVille =
+            ville === "" || profile.ville.toLowerCase().startsWith(ville);
+
+        const matchQuartier =
+            quartier === "" || profile.quartier.toLowerCase().startsWith(quartier);
+
+        const matchAge =
+            profile.age >= ageMin && profile.age <= ageMax;
+
+        const matchCorpulence =
+            corp === "" ||
+            (profile.corpulence && profile.corpulence.toLowerCase() === corp);
+
+        return matchVille && matchQuartier && matchAge && matchCorpulence;
+    });
+
+    if (showCount) {
+        document.getElementById("resultCount").innerText =
+            `${currentFiltered.length} profil(s) trouvé(s)`;
+    }
+
+    currentPage = 1;
+    renderFeed();
+}
+
+// 🔹 Auto-filter live
+villeInput.addEventListener("input", autoFilter);
+quartierInput.addEventListener("input", autoFilter);
+document.getElementById("filterCorpulence").addEventListener("input", autoFilter);
+document.getElementById("ageMin").addEventListener("input", autoFilter);
+document.getElementById("ageMax").addEventListener("input", autoFilter);
+
+
+    //gerer les inscriptions
+
+document.addEventListener("DOMContentLoaded", function () {
+
+const role = document.getElementById("suRole");
+const corpulence = document.getElementById("signFilterCorpulence");
+const repere = document.getElementById("surepere");
+const proFields = document.getElementById("proFields");
+
+const name = document.getElementById("suName");
+const age = document.getElementById("suAge");
+const email = document.getElementById("email");
+const whatsapp = document.getElementById("suWhats");
+const ville = document.getElementById("suville");
+const quartier = document.getElementById("suquartier");
+
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
+const checkbox = document.getElementById("acceptRules");
+const signupBtn = document.getElementById("inscription");
+
+const ageError = document.getElementById("ageError");
+const emailError = document.getElementById("emailError");
+const error = document.getElementById("passwordError");
+const nammeError = document.getElementById("nameError");
+
+// -----------------------------
+// ÉTAT INITIAL
+// -----------------------------
+signupBtn.disabled = true;
+proFields.style.display = "none";
+corpulence.style.display = "none";
+repere.style.display = "none";
+ageError.style.display = "none";
+emailError.style.display = "none";
+error.style.display = "none";
+nameError.style.display = "none";
+  
+// -----------------------------
+// OUTILS
+// -----------------------------
+function isVisible(el) {
+  return el && el.offsetParent !== null;
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function isValidCMPhone(num) {
+  return /^(\+237)?6[0-9]{8}$/.test(num.trim());
+}
+
+  
+// Fonction de validation pour le nom
+function validateName() {
+    const nameValue = name.value.trim();
+    
+
+    // Si vide → afficher rien
+    if (nameValue === "") {
+        nameError.style.display = "none";
+        nameError.textContent = "";
+        return false;
+    }
+
+     if (nameValue.length < 5) {
+        nameError.classList.add("text-danger")
+        nameError.style.display = "block";
+        nameError.textContent = "❗ Trop court.";
+        return false;
+    } 
+  
+    // Si plus de 24 caractères → erreur
+   else if (nameValue.length > 24) {
+        nameError.classList.add("text-danger")
+        nameError.style.display = "block";
+        nameError.textContent = "❗ Trop long.";
+        return false;
+    } 
+    
+    // Si OK → message validé
+    else {
+         nameError.classList.remove("text-danger");
+        
+        nameError.style.display = "block";
+        nameError.textContent = "✔ Nom validé";
+        nameError.style.color = "green";
+        return true;
+    }
+
+    
+}
+
+
+  
+// -----------------------------
+// ✅ VALIDATION WHATSAPP CAMEROUN EN TEMPS RÉEL
+// -----------------------------
+
+let phoneError = document.getElementById("phoneError");
+let phoneSuccess = document.getElementById("phoneSuccess");
+
+// ✅ Si les div n’existent pas, on les crée automatiquement
+if (!phoneError) {
+  phoneError = document.createElement("div");
+  phoneError.id = "phoneError";
+  phoneError.className = "text-danger  mt-1";
+  phoneError.style.display = "none";
+  whatsapp.after(phoneError);
+}
+
+if (!phoneSuccess) {
+  phoneSuccess = document.createElement("div");
+  phoneSuccess.id = "phoneSuccess";
+  phoneSuccess.className = "text-success mt-1";
+  phoneSuccess.style.display = "none";
+  whatsapp.after(phoneSuccess);
+}
+
+whatsapp.addEventListener("input", () => {
+  const value = whatsapp.value.trim();
+
+  // Vide → rien afficher
+  if (value === "") {
+    phoneError.style.display = "none";
+    phoneSuccess.style.display = "none";
+    return;
+  }
+
+  // ❌ Numéro invalide
+  if (!isValidCMPhone(value)) {
+    phoneError.textContent = "❗ Numéro incorrect";
+    phoneError.style.display = "block";
+    phoneSuccess.style.display = "none";
+  } 
+  // ✅ Numéro valide
+  else {
+    
+    phoneSuccess.textContent = " ✔ Numero validé";
+    phoneSuccess.style.display = "block";
+    phoneError.style.display = "none";
+  }
+
+  validateForm(); // 🔥 Mise à jour du bouton automatiquement
+});
+
+
+// -----------------------------
+// USER PRO → AFFICHAGE CHAMPS
+// -----------------------------
+role.addEventListener("change", function () {
+  if (role.value === "userPro") {
+    corpulence.style.display = "block";
+    repere.style.display = "block";
+    proFields.style.display = "block";
+  } else {
+    corpulence.style.display = "none";
+    repere.style.display = "none";
+    proFields.style.display = "none";
+    corpulence.value = "";
+    repere.value = "";
+  }
+  validateForm();
+});
+
+// -----------------------------
+// MOTS DE PASSE
+// -----------------------------
+function checkPasswords() {
+  const pass = password.value.trim();
+  const confirm = confirmPassword.value.trim();
+
+  // Si un des deux est vide → rien à afficher
+  if (!pass || !confirm) {
+    error.style.display = "none";
+    return false;
+  }
+
+  // Vérification lettre par lettre (feedback immédiat)
+  if (!pass.startsWith(confirm)) {
+    error.classList.remove("text-success");
+    error.classList.add("text-danger");
+    error.textContent = "❗ Les lettres ne correspondent pas";
+    error.style.display = "block";
+    return false;
+  }
+
+  // Si la confirmation n'est pas encore complète
+  if (pass !== confirm) {
+    error.classList.remove("text-danger");
+    error.classList.add("text-success");
+    error.textContent = "⏳ Continuez à taper…";
+    error.style.display = "block";
+    return false;
+  }
+
+  // ✅ Si tout est strictement identique
+  error.classList.remove("text-danger");
+  error.classList.add("text-success");
+  error.textContent = "✔ Mots de passe identiques ";
+  error.style.display = "block";
+  return true;
+}
+
+password.addEventListener("input", validateForm);
+confirmPassword.addEventListener("input", validateForm);
+
+// -----------------------------
+// EMAIL
+// -----------------------------
+email.addEventListener("input", () => {
+
+// Toujours SMALL
+emailError.classList.add("small");
+
+const value = email.value.trim();
+
+if (value === "") {
+  emailError.style.display = "none";
+  return;
+}
+
+if (!isValidEmail(value)) {
+  emailError.textContent = "Email invalide ❗";
+  emailError.style.display = "block";
+
+  emailError.classList.remove("text-success");
+  emailError.classList.add("text-danger", "small");
+
+} else {
+  emailError.textContent = "✔ Email validé";
+  emailError.style.display = "block";
+
+  emailError.classList.remove("text-danger");
+  emailError.classList.add("text-success", "small");
+}
+
+validateForm();
+});
+
+// -----------------------------
+// ÂGE
+// -----------------------------
+age.addEventListener("input", () => {
+  const a = parseInt(age.value);
+
+  if (!a) {
+    ageError.style.display = "none";
+  } else if (a < 21) {
+    
+    ageError.textContent = "Accès interdit aux mineurs ❗";
+    ageError.classList.remove("text-success");
+    ageError.style.display = "block";
+    ageError.classList.add("text-danger" ,"small");
+  } else if (a > 45) {
+     ageError.textContent = "Trop âgé(e) ❗";
+    ageError.classList.remove("text-success");
+    ageError.style.display = "block";
+    ageError.classList.add("text-danger" ,"small");
+  } else {
+    ageError.classList.remove("text-danger");
+    ageError.textContent = "✔ Âge validé";
+    ageError.classList.add("text-success", "small");
+    ageError.style.display = "block";
+   }
+
+  validateForm();
+});
+
+// -----------------------------
+// VALIDATION GLOBALE
+// -----------------------------
+function validateForm() {
+
+  let valid = true;
+
+  // Nom
+  if (!validateName()) valid = false;
+  
+  // ville
+  if (!ville.value.trim()) valid = false;
+  
+  // quartier
+  if (!quartier.value.trim()) valid = false;
+
+  // Âge
+  const a = parseInt(age.value);
+  if (!a || a < 21 || a > 45) valid = false;
+
+    
+  // Email
+  if (!isValidEmail(email.value)) valid = false;
+
+  // WhatsApp Cameroun
+  if (!isValidCMPhone(whatsapp.value)) valid = false;
+
+  // Mot de passe
+  if (password) {
+    if (!isPasswordStrong(password.value)) {
+      valid = false;
+    }
+  }
+  if (!checkPasswords()) valid = false;
+
+  // Champs PRO visibles
+  if (isVisible(corpulence) && !corpulence.value.trim()) valid = false;
+  if (isVisible(repere) && !repere.value.trim()) valid = false;
+
+  // Conditions
+  if (!checkbox.checked) valid = false;
+
+  // ✅ Activation finale
+  signupBtn.disabled = !valid;
+}
+
+// -----------------------------
+// ÉCOUTEURS
+// -----------------------------
+[
+  role, name, age, email, whatsapp, ville, quartier,
+  corpulence, repere, password, confirmPassword, checkbox
+].forEach(el => {
+  if (!el) return;
+  el.addEventListener("input", validateForm);
+  el.addEventListener("change", validateForm);
+});
+
+});
+
+
+// conseil pour bon mots de passe
+(function () {
+  const pwInput = document.getElementById("password");
+  const infoPass = document.getElementById("passwordHelp");
+
+  // éléments
+  const pwBar = document.getElementById("pwBar");
+  const pwStatus = document.getElementById("pwStatus");
+  const pwLen = document.getElementById("pwLen");
+  const pwLower = document.getElementById("pwLower");
+  const pwUpper = document.getElementById("pwUpper");
+  const pwDigit = document.getElementById("pwDigit");
+  const pwSpecial = document.getElementById("pwSpecial");
+  const pwCriteria = document.getElementById("pwCriteria");
+  const pwTip = document.getElementById("pwTip");
+  const btnSave = document.getElementById("btnSaveProfil");
+
+  // critères
+  const rules = {
+    length: pass => pass.length >= 8,
+    lower:  pass => /[a-z]/.test(pass),
+    upper:  pass => /[A-Z]/.test(pass),
+    digit:  pass => /[0-9]/.test(pass),
+    special: pass => /[!@#\$%\^&\*\(\)\-_=\+\[\]\{\};:'",\.<>\/\?\\|`~]/.test(pass)
+  };
+
+  function passwordScore(pass) {
+    let score = 0;
+    if (rules.length(pass)) score++;
+    if (rules.lower(pass)) score++;
+    if (rules.upper(pass)) score++;
+    if (rules.digit(pass)) score++;
+    if (rules.special(pass)) score++;
+    return score;
+  }
+
+  function isPasswordStrong(pass) {
+    const score = passwordScore(pass);
+    return rules.length(pass) && score >= 4;
+  }
+
+  function updateUI(pass) {
+    if (pass === "") {
+      // 🔥 Masquer complètement si vide
+      infoPass.classList.add("d-none");
+       
+      pwBar.style.width = "0%";
+      pwStatus.textContent = "";
+      pwStatus.style.color = "";
+
+      pwLen.textContent = "❌";
+      pwLower.textContent = "❌";
+      pwUpper.textContent = "❌";
+      pwDigit.textContent = "❌";
+      pwSpecial.textContent = "❌";
+
+      return false;
+    }else{
+      
+        // ✓ critères
+    pwLen.textContent = rules.length(pass) ? "✔" : "❌";
+    pwLower.textContent = rules.lower(pass) ? "✔" : "❌";
+    pwUpper.textContent = rules.upper(pass) ? "✔" : "❌";
+    pwDigit.textContent = rules.digit(pass) ? "✔" : "❌";
+    pwSpecial.textContent = rules.special(pass) ? "✔" : "❌";
+
+    }
+
+    // 🔥 Afficher le guide
+    infoPass.classList.remove("d-none");
+
+    const score = passwordScore(pass);
+
+    // ✓ Barre
+    const pct = Math.round((score / 5) * 100);
+    pwBar.style.width = pct + "%";
+
+    // ✓ Couleur
+    if (score <= 1) {
+      pwBar.style.background = "#e74c3c";
+      pwStatus.textContent = "Faible";
+      pwStatus.style.color = "#e74c3c";
+    } else if (score <= 3) {
+      pwBar.style.background = "#f1c40f";
+      pwStatus.textContent = "Moyen";
+      pwStatus.style.color = "#f1c40f";
+    } else {
+      pwBar.style.background = "#2ecc71";
+      pwStatus.textContent = "Fort";
+      pwStatus.style.color = "#2ecc71";
+     }
+
+    if(isPasswordStrong(pass)){
+      
+     pwCriteria.classList.add("d-none");
+      pwTip.classList.add("d-none");
+      return true;
+  }else if(pass !== ""  && !isPasswordStrong(pass)){
+         
+     pwCriteria.classList.remove("d-none");
+      pwTip.classList.remove("d-none");
+     return false;
+  }
+
+       }
+
+  // écouteur live
+  pwInput.addEventListener("input", (e) => {
+    const pass = e.target.value || "";
+    updateUI(pass);
+  });
+
+  // expose global
+  window.passwordScore = passwordScore;
+  window.isPasswordStrong = isPasswordStrong;
+
+  // initialisation propre
+  updateUI(pwInput.value || "");
+
+})();
+
+
+
+
+  /* ========== Signup  & Login ========== */
+  
+document.getElementById("signupForm").addEventListener("submit", function (e) {
+  e.preventDefault(); // Empêche le rechargement de la page
+
+  const role = document.getElementById("suRole").value;
+  const name = document.getElementById("suName").value.trim();
+  const age = document.getElementById("suAge").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const whatsapp = document.getElementById("suWhats").value.trim();
+  const ville = document.getElementById("suville").value.trim();
+  const quartier = document.getElementById("suquartier").value.trim();
+  const repere = document.getElementById("surepere").value.trim();
+  const corpulence = document.getElementById("signFilterCorpulence").value;
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+  const acceptRules = document.getElementById("acceptRules").checked;
+
+  // Sécurité finale
+  if (document.getElementById("inscription").disabled) {
+    alert("Veuillez remplir correctement tous les champs.");
+    return;
+  }
+
+  // ✅ Données envoyées au backend
+  const formData = {
+    role,
+    name,
+    age,
+    email,
+    whatsapp,
+    ville,
+    quartier,
+    password,
+    acceptRules,
+  };
+
+  // Champs PRO uniquement si userPro
+  if (role === "userPro") {
+    formData.repere = repere;
+    formData.corpulence = corpulence;
+  }
+
+  console.log("📤 Données envoyées :", formData);
+
+  // =============================
+  // ✅✅✅ ENVOI VERS LE BACKEND
+  // =============================
+  
+  fetch("https://ton-api.com/signup", {   // ⚠️ URL À REMPLACER
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert("✅ Inscription réussie !");
+      document.getElementById("signupForm").reset();
+    } else {
+      alert("❌ Erreur : " + data.message);
+    }
+  })
+  .catch(err => {
+    console.error("Erreur réseau :", err);
+    alert("❌ Impossible de contacter le serveur");
+  });
+  
+
+  // =====================================================
+  // ❌❌❌ PARTIE BACKEND (EXEMPLE NODE.JS — EN COMMENTAIRE)
+  // =====================================================
+
+  /*
+  app.post("/signup", async (req, res) => {
+    const {
+      role,
+      name,
+      age,
+      email,
+      whatsapp,
+      ville,
+      quartier,
+      password,
+      repere,
+      corpulence
+    } = req.body;
+
+    // Vérifications serveur
+    if (!name || !age || !email || !password) {
+      return res.json({ success: false, message: "Champs manquants" });
+    }
+
+    if (role === "userPro" && (!repere || !corpulence)) {
+      return res.json({ success: false, message: "Champs professionnels manquants" });
+    }
+
+    // Hash du mot de passe
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insertion en base
+    await db.query("INSERT INTO users SET ?", {
+      role,
+      name,
+      age,
+      email,
+      whatsapp,
+      ville,
+      quartier,
+      repere,
+      corpulence,
+      password: hashedPassword
+    });
+
+    res.json({ success: true });
+  });
+  */
+});
+
+
+// Pour la verifié un compte pour la connexion
+
+// pour voir le mot de passe
+
+const toggleLoginPassword = document.getElementById("toggleLoginPassword");
+const loginPassword = document.getElementById("loginPassword");
+
+toggleLoginPassword.addEventListener("click", () => {
+  const type = loginPassword.type === "password" ? "text" : "password";
+  loginPassword.type = type;
+
+  // change eye icon
+  toggleLoginPassword.textContent = type === "password" ? "🙈" : "🙉";
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+const role = document.getElementById("liRole");
+const phone = document.getElementById("liName");
+const password = document.getElementById("loginPassword");
+const loginBtn = document.querySelector(".loginButton");
+
+// ✅ État initial
+loginBtn.disabled = true;
+loginBtn.style.opacity = "0.6";
+loginBtn.style.cursor = "not-allowed";
+
+// ✅ Vérification numéro Cameroun
+function isValidCMPhone(num) {
+  return /^(\+237)?6[0-9]{8}$/.test(num.trim());
+}
+ // critères (regex)
+  const rules = {
+    length: pass => pass.length >= 8,
+    lower:  pass => /[a-z]/.test(pass),
+    upper:  pass => /[A-Z]/.test(pass),
+    digit:  pass => /[0-9]/.test(pass),
+    special: pass => /[!@#\$%\^&\*\(\)\-_=\+\[\]\{\};:'",\.<>\/\?\\|`~]/.test(pass)
+  };
+
+  // retourne score 0..5
+  function passwordScore(pass) {
+    let score = 0;
+    if (rules.length(pass)) score++;
+    if (rules.lower(pass)) score++;
+    if (rules.upper(pass)) score++;
+    if (rules.digit(pass)) score++;
+    if (rules.special(pass)) score++;
+    return score;
+  }
+
+  // indique si mot de passe est "robuste" (3 critères min + length)
+  function isPasswordStrong(pass) {
+    // stricte : require length + at least 3 other rules (so total >=4)
+    const score = passwordScore(pass);
+    return (rules.length(pass) && score >= 4);
+  }
+  
+  
+// ✅ Validation globale
+function validateLoginForm() {
+  let valid = true;
+
+  if (!role.value.trim()) valid = false;
+  if (!phone.value.trim()) valid = false;
+ // if (!password.value.trim()) valid = false;
+
+   if (password) {
+    if (!isPasswordStrong(password.value)) {
+      valid = false;
+    }
+  }
+  
+  // ✅ Vérifie numéro Cameroun
+  if (!isValidCMPhone(phone.value)) valid = false;
+
+  // ✅ Activation / Désactivation bouton
+  loginBtn.disabled = !valid;
+  loginBtn.style.opacity = valid ? "1" : "0.6";
+  loginBtn.style.cursor = valid ? "pointer" : "not-allowed";
+  
+  
+  
+}
+
+// ✅ Écouteurs sur tous les champs
+[role, phone, password].forEach(el => {
+  el.addEventListener("input", validateLoginForm);
+  el.addEventListener("change", validateLoginForm);
+});
+
+});
+
+
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+  e.preventDefault(); // empêche le rechargement
+
+  const role = document.getElementById("liRole").value;
+  const phone = document.getElementById("liName").value.trim();
+  const password = document.querySelector("#loginForm input[type='password']").value.trim();
+
+  if (!phone || !password) {
+    alert("Veuillez remplir tous les champs.");
+    return;
+  }
+
+  // ✅ Données envoyées au backend
+  const loginData = {
+    role,
+    phone,
+    password
+  };
+
+  console.log("📤 Données envoyées :", loginData);
+
+  // =============================
+  // ✅✅✅ ENVOI VERS LE BACKEND
+  // =============================
+
+  fetch("https://ton-api.com/login", { // ⚠️ URL À REMPLACER
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(loginData),
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    // ✅ SI COMPTE EXISTE
+    if (data.success === true) {
+      alert("✅ Connexion réussie !");
+      
+      // Exemple de stockage local
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      // Redirection
+      window.location.href = "dashboard.html";
+    }
+
+    // ❌ SI COMPTE INEXISTANT
+    else if (data.notFound === true) {
+      const goRegister = confirm(
+        "⚠️ Ce compte n'existe pas encore.\nSouhaitez-vous vous inscrire maintenant ?"
+      );
+
+      if (goRegister) {
+        window.location.href = "signup.html";
+      }
+    }
+
+    // ❌ MAUVAIS MOT DE PASSE
+    else {
+      alert("❌ Mot de passe incorrect.");
+    }
+  })
+  .catch(err => {
+    console.error("Erreur réseau :", err);
+    alert("❌ Impossible de contacter le serveur.");
+  });
+
+  // =====================================================
+  // ❌❌❌ PARTIE BACKEND (EXEMPLE NODE.JS — EN COMMENTAIRE)
+  // =====================================================
+
+  /*
+  app.post("/login", async (req, res) => {
+    const { role, phone, password } = req.body;
+
+    // Vérification champs
+    if (!phone || !password) {
+      return res.json({ success: false, message: "Champs manquants" });
+    }
+
+    // Recherche utilisateur
+    const user = await db.query(
+      "SELECT * FROM users WHERE whatsapp = ? AND role = ?",
+      [phone, role]
+    );
+
+    // ❌ Compte inexistant
+    if (user.length === 0) {
+      return res.json({ notFound: true });
+    }
+
+    // ✅ Vérification mot de passe
+    const isOk = await bcrypt.compare(password, user[0].password);
+    if (!isOk) {
+      return res.json({ success: false });
+    }
+
+    // ✅ Connexion réussie
+    return res.json({
+      success: true,
+      user: {
+        id: user[0].id,
+        name: user[0].name,
+        role: user[0].role
+      }
+    });
+  });
+  */
+
+});
+
+
+  /* ========== Nav avatar update & auth UI ========== */
+  function updateNavAvatar(){
+    const btn = document.getElementById('navAvatarImg');
+    const large = document.getElementById('navAvatarLarge');
+    const nameEl = document.getElementById('navUserName');
+    if(currentUser){
+      btn.src = currentUser.photo || `https://picsum.photos/seed/${currentUser.username}/80/80`;
+      large.src = currentUser.photo || `https://picsum.photos/seed/${currentUser.username}/120/120`;
+      nameEl.innerText = currentUser.name;
+      document.getElementById('logoutLink').style.display = 'block';
+    } else {
+      btn.src = 'https://picsum.photos/seed/guest/80/80';
+      large.src = 'https://picsum.photos/seed/guest/120/120';
+      nameEl.innerText = 'Invité';
+      document.getElementById('logoutLink').style.display = 'none';
+    }
+  }
+
+  document.getElementById('menuFavsLink').addEventListener('click', (e)=>{ e.preventDefault(); document.getElementById('mes-favoris').scrollIntoView({behavior:'smooth'}); });
+  document.getElementById('logoutLink').addEventListener('click', (e)=>{ e.preventDefault(); localStorage.removeItem(LS_CURRENT); currentUser=null; updateNavAvatar(); renderFavs(); renderFeed(); alert('Déconnecté'); });
+
+  /* ========== Profile Modal: services, delivery, total, whatsapp, similar ========== */
+  let profilModalInstance = null;
+let modalLock = false;
+let profileOpen = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modalEl = document.getElementById("profilModal");
+  profilModalInstance = new bootstrap.Modal(modalEl, { backdrop: true });
+});
+
+    
+    
+
+// ===============================
+// ✅ OUVERTURE DU PROFIL (ANTI DOUBLON)
+// ===============================
+function openProfileModal(id) {
+
+  if (modalLock) return;
+  modalLock = true;
+  setTimeout(() => modalLock = false, 400);
+
+  const badge = document.getElementById("profilBadge");
+  const p = POSTS.find(x => x.id === id);
+  if (!p) return alert('Profil introuvable');
+
+  profileOpen = p;
+  document.getElementById("profilNameText").innerText = `${p.name}, ${p.age} ans`;
+
+  // -------- BADGES --------
+  if (p.typeCompte === "PREMIUM") {
+    badge.innerHTML = `<span class="badge-premium">PREMIUM ⭐</span>`;
+  }
+  else if (p.typeCompte === "VIP") {
+    badge.innerHTML = `<span class="badge-vip">VIP ⚡</span>`;
+  }
+  else if (p.enAvant === "true") {
+    badge.innerHTML = `<span class="badge-avant m-2 px-2 py-1">⭐ En avant</span>`;
+  }
+  else badge.innerHTML = "";
+
+  // -------- ONLINE --------
+  let onlineBadgeProfil = "";
+  if (p.online === "true") {
+    onlineBadgeProfil = `
+      <span style="background:#28a745;color:white;padding:3px 8px;border-radius:6px;font-size:0.85em;font-weight:bold;">
+        ● en ligne
+      </span>
+    `;
+  }
+
+  // -------- DÉPLACEMENT --------
+  let deplace = "";
+  if (p.deplace === "non") {
+    deplace = "je ne me déplace pas cc.";
+    document.getElementById('domicile').style.display = "none";
+  } 
+  else {
+    deplace = "je peux me déplacer aux frais de celui qui m'invite.";
+    document.getElementById('domicile').style.display = "block";
+  }
+
+  // -------- REMPLISSAGE --------
+  document.getElementById('profilPhoto1').src = p.img1;
+  document.getElementById('profilPhoto2').src = p.img2;
+
+  document.getElementById('profilDetails').innerHTML = `
+    ${onlineBadgeProfil}<br>
+    Corpulence : <strong>${p.corpulence}</strong><br>
+    Adresse : <strong>${p.repere} - ${p.quartier}, ${p.ville}</strong><br><br>
+    <strong>${deplace}</strong>
+  `;
+
+  // -------- RESET --------
+  document.getElementById('servicesForm').reset();
+  document.getElementById('totalPrice').innerText = '0';
+  document.getElementById('sendWhatsappBtn').disabled = true;
+
+
+ // Quand le modal se ferme → cacher tous les prix + reset radio + total + bouton WhatsApp
+const servicesModal = document.getElementById("servicesModal"); // ⚠️ mets ici l'ID exact de ton modal
+
+
+  // ✅ Cacher tous les prix
+  document.querySelectorAll("[id^='prixSrv']").forEach(prix => {
+    prix.classList.add("d-none");
+  });
+
+        place.style.display = "none";
+        nb.style.display = "none";
+        place.value = "";
+
+
+  renderSimilar(p);
+  
+  updateFavBtnState(p.id);
+  document.getElementById('sendWhatsappBtn').onclick = sendWhatsappForProfile;
+
+  // -------- OUVERTURE MODAL --------
+  // -------- OUVERTURE MODAL --------
+const modalEl = document.getElementById("profilModal");
+if (!modalEl.classList.contains("show")) {
+  profilModalInstance.show();
+}
+
+// ✅ SCROLL IMMÉDIAT EN HAUT DU MODAL
+requestAnimationFrame(() => {
+  const modalBody = document.getElementById("profilModalBody");
+  if (modalBody) modalBody.scrollTop = 0;
+});
+
+}
+
+
+// ===============================
+// ✅ TOTAL SERVICES (RADIO)
+// ===============================
+function updateTotal() {
+  let total = 0;
+
+  const selected = document.querySelector("#servicesForm input[type=radio]:checked");
+
+  if (selected) {
+    total = parseFloat(selected.value);
+  }
+
+  document.getElementById('totalPrice').innerText = formatNumber(total);
+}
+
+
+// ===============================
+// ✅ AFFICHAGE PRIX SELON RADIO
+// ===============================
+document.querySelectorAll("input[name='service']").forEach(radio => {
+  radio.addEventListener("change", () => {
+
+    // ✅ Cacher tous les prix
+    document.querySelectorAll("[id^='prixSrv']").forEach(prix => {
+      prix.classList.add("d-none");
+    });
+
+    // ✅ Afficher uniquement le prix sélectionné
+    const selectedPrix = document.getElementById("prix" + radio.id.charAt(0).toUpperCase() + radio.id.slice(1));
+    
+    if (selectedPrix) {
+      selectedPrix.classList.remove("d-none");
+    }
+
+    // ✅ Mettre à jour le total
+    updateTotal();
+
+    // ✅ Mettre à jour le bouton WhatsApp
+    updateWhatsappButtonState();
+  });
+});
+
+
+// ===============================
+// ✅ BOUTON WHATSAPP (RADIO)
+// ===============================
+function updateWhatsappButtonState() {
+  const serviceSelected = document.querySelector("#servicesForm input[type=radio]:checked");
+  document.getElementById("sendWhatsappBtn").disabled = !serviceSelected;
+}
+
+
+// ===============================
+// ✅ WHATSAPP ENVOI
+// ===============================
+function sendWhatsappForProfile() {
+  if (!profileOpen) return;
+
+  const selected = document.querySelector('#servicesForm input[type=radio]:checked');
+  if (!selected) return alert("Veuillez sélectionner un service.");
+
+  const serviceName = selected.parentElement.innerText.trim();
+  const total = document.getElementById('totalPrice').innerText;
+  const home = document.getElementById('deliveryPlace').value.trim();
+
+  const homeLine = home !== "" ? `voici ma position : *${home}*\n` : "";
+
+  const msg = encodeURIComponent(
+`Salut ${profileOpen.name} 😏 
+J'ai parcouru tes services sur *TAKE IT* 
+et ils m'attirent beaucoup  
+Je suis partant pour :
+➡ ${serviceName}   \n
+Le montant prévu est de : *${total} FCFA*   
+${homeLine}  \n
+T’es disponible maintenant? 😊`
+  );
+
+  const num = profileOpen.whatsapp.replace(/\D/g, '');
+  if (num.length < 8) return alert('Numéro WhatsApp invalide.');
+
+  window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+}
+
+
+// ===============================
+// ✅ FAVORIS
+// ===============================
+function updateFavBtnState(postId) {
+  const btn = document.getElementById('favToggleBtn');
+
+  if (!currentUser) {
+    btn.innerText = '♡ Ajouter aux favoris';
+    btn.classList.remove('btn-danger');
+    return;
+  }
+
+  const arr = favoritesByUser[currentUser.username] || [];
+
+  if (arr.includes(postId)) {
+    btn.innerText = '♥ Retirer des favoris';
+    btn.classList.add('btn-danger');
+  } 
+  else {
+    btn.innerText = '♡ Ajouter aux favoris';
+    btn.classList.remove('btn-danger');
+  }
+}
+
+function baseFilter(x, p) {
+  return (
+   // x.online === "true" &&
+    x.ville === p.ville &&
+    x.quartier === p.quartier &&
+    x.corpulence === p.corpulence &&
+    x.id !== p.id
+  );
+}
+
+// ===============================
+// ✅ PROFILS SIMILAIRES (SAFE)
+// ===============================
+function renderSimilar(p) {
+  const similarList = document.getElementById('similarList');
+  similarList.innerHTML = "";
+  
+  const baseList = sortOnlineFirst(POSTS.filter(x => baseFilter(x, p)));
+
+  
+const vipList = baseList.filter(x =>
+  x.typeCompte === "VIP"
+);
+
+const premiumList = baseList.filter(x =>
+  x.typeCompte === "PREMIUM"
+);
+
+const avantList = baseList.filter(x =>
+  x.enAvant === "true" &&
+  x.typeCompte !== "VIP" &&
+  x.typeCompte !== "PREMIUM"
+);
+
+const classiqueList = baseList.filter(x =>
+  x.typeCompte !== "VIP" &&
+  x.typeCompte !== "PREMIUM" &&
+  x.enAvant !== "true"
+);
+
+  
+  const similar = [
+  ...vipList,
+  ...premiumList,
+  ...avantList,
+  ...classiqueList
+].slice(0, 10); // limite finale
+
+
+  if (similar.length === 0) {
+    similarList.innerHTML = '<div class="text-dark">Aucun profil similaire trouvé.</div>';
+    return;
+  }
+
+  // ✅ Conteneur scroll horizontal
+  const wrapper = document.createElement("div");
+  wrapper.className = "d-flex gap-3 py-3 scroll-horizontal";
+
+  // ✅ Ajout des cartes
+  similar.forEach(s => {
+    const card = document.createElement("div");
+    card.className = "card col-6 col-md-4 col-lg-3 card-prof text-center p-2" ;
+    card.style.minWidth = "170px";
+    card.style.height = "auto";
+    card.style.background = "#d14481";
+    card.style.border = "2px solid var(--muted)";
+    const onlineBadge = s.online === "true"
+      ? `<span class="online-dot position-absolute top-0 end-0 m-3" style="background:#D14481"></span>`
+      : "";
+
+    
+
+    card.innerHTML = `
+      
+      ${onlineBadge} 
+      <img src="${s.img1}" style="height:120px;object-fit:cover;border-radius:8px" class="w-100">
+      <div class="fw-bold text-white d-flex w-100"
+     style="font-size:1em; white-space:normal; overflow-wrap:break-word;height:50px">
+          ${s.name}, ${s.age} ans
+     </div>
+      <button 
+        class="btn btn-sm text-white fw-bold mt-2 voir-similaire" 
+        data-id="${s.id}" 
+        style="background:var(--muted);border:none"
+      >
+        Voir
+      </button>
+    
+    
+    `;
+
+    wrapper.appendChild(card);
+  });
+
+  // ✅ Injection propre dans similarList
+  similarList.appendChild(wrapper);
+}
+
+
+
+// ===============================
+// ✅ CLICK GLOBAL UNIQUE SUR "VOIR"
+// ===============================
+document.addEventListener("click", function (e) {
+  const btn = e.target.closest(".voir-similaire");
+  if (!btn) return;
+
+  const id = Number(btn.dataset.id);
+  if (!id) return;
+
+  openProfileModal(id);
+});
+
+
+
+
+
+  
+
+
+  
+  /* ========== Quick Whats from carousel (not shown on cards) ========== */
+  function quickWhats(id){
+    const p = POSTS.find(x=>x.id===id);
+    if(!p) return;
+    const msg = encodeURIComponent(`Bonjour ${p.name}, je vous contacte via Take It.`);
+    const num = p.whatsapp.replace(/\D/g,'');
+    window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+  }
+
+  /* ========== Init ========== */
+  (function init(){
+    try{ favoritesByUser = JSON.parse(localStorage.getItem(LS_FAVORITES) || '{}'); } catch(e){ favoritesByUser = {}; }
+    try{ users = JSON.parse(localStorage.getItem(LS_USERS) || '[]'); } catch(e){ users = []; }
+    try{ currentUser = JSON.parse(localStorage.getItem(LS_CURRENT) || 'null'); if(!currentUser) currentUser=null; } catch(e){ currentUser=null; }
+
+    // ensure each existing user has a favorites array
+    if(Array.isArray(users)) users.forEach(u=>{ favoritesByUser[u.username] = favoritesByUser[u.username] || []; });
+
+    // default filtered list
+    currentFiltered = POSTS.slice();
+
+    // build carousel, feeds, UI
+    buildTopCarousel();
+    renderFeed();
+    renderFavs();
+    updateNavAvatar();
+
+    // menu fav scroll
+    document.getElementById('menuFavsLink').addEventListener('click', (e)=>{ e.preventDefault(); document.getElementById('mes-favoris').scrollIntoView({behavior:'smooth'}); });
+
+    // attach delivery checkbox to recalc (delivery checkbox has value 2100)
+    document.getElementById('deliveryOpt').onchange = function(){ updateTotal(); if(this.checked){ document.getElementById('totalPrice').innerText = formatNumber(parseFloat(document.getElementById('totalPrice').innerText.replace(/\s/g,'')) + 2100); } else { /* recalc properly below through updateTotal */ updateTotal(); } };
+  })();
+
+    
+    
+    document.addEventListener('hidden.bs.modal', function () {
+  
+      
+      
+      document.body.classList.remove('modal-open');
+      document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+      
+      
+});
+
+
+
+    
+  </script>
+</body>
+</html>
